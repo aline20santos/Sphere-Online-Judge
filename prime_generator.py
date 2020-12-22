@@ -10,18 +10,25 @@ Original file is located at
 
 
 # your code goes here
+import math
 n_cases = int(input())
 
 for y in range(n_cases):
-	n,k = raw_input().split()
-	n_1 = int(n)
-	n_2 = int(k)
-	for x in range(n_1, n_2+1):
-		if x > 1:
-			for i in range(2, x):
-				if (x % i) == 0 :
-					break
-				elif x == i+1:
-					print(x)
-					break
-
+  n,k = input().split()
+  n_1 = int(n)
+  n_2 = int(k)
+  
+  for x in range(n_1, n_2+1):
+    if x > 1:
+      primes = []
+      for i in range(2, x): #laço que percorre todos os números do intervalo
+        primes.append(i)
+        i = 2 
+      while(i <= int(math.sqrt(x))): #if i is in list then we gotta delete its multiples
+        if i in primes:
+                    #j will give multiples of i, starting from 2*i
+              for j in range(i*2, x+1, i):
+                  if j in primes: #deleting the multiple if found in list
+                    primes.remove(j)
+        i = i+1
+print (primes)
